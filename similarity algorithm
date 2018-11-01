@@ -1,0 +1,47 @@
+几种相似度算法分析
+1. 欧几里得距离
+   1.定义
+    欧几里得度量（euclidean metric）（也称欧氏距离）是一个通常采用的距离定义
+    指在m维空间中两个点之间的真实距离，或者向量的自然长度（即该点到原点的距离）
+    在二维和三维空间中的欧氏距离就是两点之间的实际距离。
+    2.公式
+    d(x,y)=根号下（i个x减去i个y）的平方     sim(x,y)=1/1+d(x,y)
+    欧氏距离越小，两个用户相似度就越大，欧氏距离越大，两个用户相似度就越小
+    
+#得到两者共同评分项
+defGetSameItem(UL,p1,p2):
+        si = {}
+        for item in UL[p1]:
+               if item in UL[p2]:
+                       si[item] = 1
+        return si
+#欧几里得相似度算法
+defEuclidSimilarity(UL,p1,p2):
+        si = GetSameItem(UL,p1,p2)
+        if len(si) == 0:
+               return 0
+        sum_of_squares = sum([pow(UL[p1][item] -UL[p2][item] , 2) for item in si])
+        return 1/(1+math.sqrt(sum_of_squares))
+        
+ 2.皮尔逊相关系数
+   皮尔逊相关系数( Pearson correlation coefficient），又称皮尔逊积矩相关系数（Pearson product-moment correlation coefficient，简称 PPMCC或PCCs）
+   用于度量两个变量X和Y之间的相关（线性相关），其值介于-1与1之间
+   当相关系数为1时，成为完全正相关；当相关系数为-1时，成为完全负相关；相关系数的绝对值越大，相关性越强；相关系数越接近于0，相关
+   度越弱
+   1定义用户组   
+   2计算方差
+   3计算标准差
+   4计算协方差
+   五计算类相似
+   
+  皮尔逊相关的约束条件：
+  1两个变量间有线性关系
+  2变量时连续变量
+  3变量均符合正态分布，而二元分布也符合正态分布
+  4两变量独立
+  
+3Tanimoto系数(又称广义Jaccard系数)-TanimotoDistanceMeasure.
+
+通常应用于X为布尔向量，即各分量只取0或1的时候。此时，表示的是X,Y的公共特征的占X，Y所占有的特征的比例。
+
+ 
